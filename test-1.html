@@ -8,10 +8,12 @@
 <script>
 class Sprite
 {
-	constructor(x, y, imageID)
+	constructor(x, y, w, h, imageID)
 	{
 		this.x = x;
 		this.y = y;
+		this.w = 50;
+		this.h = 50;
 		this.image = document.getElementById(imageID);
 	}
 
@@ -23,7 +25,7 @@ class Sprite
 
 	render(context)
 	{
-		context.drawImage(this.image, this.x, this.y)
+		context.drawImage(this.image, this.x, this.y, this.w, this.h)
 	}
 }
 
@@ -32,7 +34,7 @@ class Sprite
 let canvas = document.getElementById("canvas");
 let context = canvas.getContext("2d");
 
-let ballSprite = new Sprite(20, 20, "ball");
+let ballSprite = new Sprite(20, 20, w, h, "ball");
 
 function update()
 {
