@@ -3,8 +3,58 @@
 	<title>Test Project</title>
 </head>
 <body>
-	Hello, universe!
+<canvas width=512 height=512 id="canvas"></canvas>
+<img src="images/ball.png" id="ball" hidden>
+<script>
+class Sprite
+{
+	constructor(x, y, imageID)
+	{
+		this.x = x;
+		this.y = y;
+		this.image = document.getElementById(imageID);
+	}
 
-	Goodbye, universe!
+	update()
+	{
+		this.x += 2;
+		this.y += 1;
+	}
+
+	render(context)
+	{
+		context.drawImage(this.image, this.x, this.y)
+	}
+}
+
+// =================================================
+
+let canvas = document.getElementById("canvas");
+let context = canvas.getContext("2d");
+
+let ballSprite = new Sprite(20, 20, "ball");
+
+function update()
+{
+	ballSprite.update();
+}
+
+function render()
+{
+	ballSprite.render(context);
+}
+
+function loop()
+{
+	update();
+	render();
+	requestAnimationFrame(loop);
+}
+
+// start the program
+loop();
+
+</script>
+
 </body>
 </html>
