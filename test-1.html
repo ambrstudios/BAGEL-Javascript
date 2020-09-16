@@ -7,28 +7,72 @@
 <script src="js/sprite.js"></script>
 
 <canvas width=512 height=512 id="canvas"></canvas>
-<img src="images/ball.png" id="ball" hidden>
+<img src = "images/ball.png" id = "ball" hidden>
+<img src = "images/discord.png" id = "discord" hidden>
+<img src = "images/dreamshield.png" id = "dream" hidden>
+<img src = "images/kirball.png" id = "kirball" hidden>
+<img src = "images/metroid.png" id = "metroid" hidden>
+<img src = "images/one-up.png" id = "one-up" hidden>
+<img src = "images/pokeball.png" id = "pokeball" hidden>
+<img src = "images/sans.png" id = "sans" hidden>
+<img src = "images/slime.png" id = "slime" hidden>
+<img src = "images/sonic.png" id = "sonic" hidden>
+
 <script>
 
 
 // =================================================
 
+// Set up our canvas and Graphics Context.
 let canvas = document.getElementById("canvas");
 let context = canvas.getContext("2d");
 
 // Math.random() -- random decimal number between 0.0 and 1.0
+// Create each respective Sprite at a random starting position, and set its size and velocity.
 
-let ballSprite1  = new Sprite( 512 * Math.random() , 512 * Math.random(), "ball");
-ballSprite1.setSize(50,50);
-ballSprite1.setVelocity(2,1);
+let ballSprite  = new Sprite(450 * Math.random(), 450 * Math.random(), "ball");
+ballSprite.setSize(50,50);
+ballSprite.setVelocity(2,1);
 
-let ballSprite2 = new Sprite(50, 100, "ball");
-ballSprite2.setSize(40,40);
-ballSprite2.setVelocity(1,3);
+let discSprite = new Sprite(450 * Math.random(), 450 * Math.random(), "discord");
+discSprite.setSize(60,60);
+discSprite.setVelocity(1,3);
 
+let dreamSprite  = new Sprite(450 * Math.random(), 450 * Math.random(), "dream");
+dreamSprite.setSize(50,50);
+dreamSprite.setVelocity(1,2);
+
+let kirbSprite  = new Sprite(450 * Math.random(), 450 * Math.random(), "kirball");
+kirbSprite.setSize(50,50);
+kirbSprite.setVelocity(3,2);
+
+let metSprite  = new Sprite(450 * Math.random(), 450 * Math.random(), "metroid");
+metSprite.setSize(50,50);
+metSprite.setVelocity(1,1);
+
+let mushSprite  = new Sprite(450 * Math.random(), 450 * Math.random(), "one-up");
+mushSprite.setSize(50,50);
+mushSprite.setVelocity(2,2);
+
+let pokeSprite  = new Sprite(450 * Math.random(), 450 * Math.random(), "pokeball");
+pokeSprite.setSize(50,50);
+pokeSprite.setVelocity(3,1);
+
+let sansSprite  = new Sprite(450 * Math.random(), 450 * Math.random(), "sans");
+sansSprite.setSize(50,50);
+sansSprite.setVelocity(3,5);
+
+let slimeSprite  = new Sprite(450 * Math.random(), 450 * Math.random(), "slime");
+slimeSprite.setSize(50,50);
+slimeSprite.setVelocity(1,1);
+
+let sonicSprite  = new Sprite(450 * Math.random(), 450 * Math.random(), "sonic");
+sonicSprite.setSize(60,60);
+sonicSprite.setVelocity(6,5);
+
+// Create the array spriteArray, and push each Sprite into the array to be instantiated.
 let spriteArray = [];
-spriteArray.push(ballSprite1);
-spriteArray.push(ballSprite2);
+spriteArray.push(ballSprite, discSprite, dreamSprite, kirbSprite, metSprite, mushSprite, pokeSprite, sansSprite, slimeSprite, sonicSprite);
 
 function update()
 {
@@ -40,9 +84,10 @@ function update()
 
 function render()
 {
-	// clear the screen
-	context.fillStyle = "#DDDDDD"
+	// Clear the screen with the following color, and create a stroke around the canvas. 
+	context.fillStyle = "#ADD8E6"
 	context.fillRect(0,0, 512,512);
+	context.strokeRect(0, 0, 512, 512);
 
 	for (let i = 0; i < spriteArray.length; i++)
 	{
@@ -52,12 +97,13 @@ function render()
 
 function loop()
 {
+	// Call all of our functions in order, then recall this function again.
 	update();
 	render();
 	requestAnimationFrame(loop);
 }
 
-// start the program
+// Start the program.
 loop();
 
 </script>

@@ -5,10 +5,12 @@ class Sprite
 		this.x = x;
 		this.y = y;
 		this.image = document.getElementById(imageID);
-		// default size values 
+
+		// -Default Size Values- 
 		this.w = 32;
 		this.h = 32;
-		// default velocity values
+
+		// -Default Velocity Values-
 		this.dx = 0;
 		this.dy = 0;
 	}
@@ -29,12 +31,13 @@ class Sprite
 	{
 		this.x += this.dx;
 		this.y += this.dy;
-		// add code for bouncing off the walls
-		if (this.x + this.w > 512)
+
+		// The following code accounts for Sprites bouncing against the canvas walls.
+		if (this.x + this.w > 512 || this.x < 0)
 			this.dx = -1 * this.dx;
 
-		if (this.x < 0)
-			this.dx = -1 * this.dx;
+		if (this.y + this.h > 512 || this.y < 0)
+			this.dy = -1 * this.dy;
 	}
 
 	render(context)
