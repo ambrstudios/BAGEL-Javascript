@@ -6,7 +6,7 @@ class Sprite
 		this.y = y;
 		this.image = document.getElementById(imageID);
 
-		// -Default Size Values- 
+		// -Default Size Values- (width, height)
 		this.w = 32;
 		this.h = 32;
 
@@ -29,6 +29,7 @@ class Sprite
 
 	update()
 	{
+		// changes position according to velocity (dx,dy)
 		this.x += this.dx;
 		this.y += this.dy;
 
