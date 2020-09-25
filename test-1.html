@@ -24,6 +24,13 @@
 
 // =================================================
 
+function onKeyDown(eventData)
+{
+	console.log("You pressed: " + eventData.key );
+}
+
+document.addEventListener("keydown", onKeyDown);
+
 // Set up our canvas and Graphics Context.
 let canvas = document.getElementById("canvas");
 let context = canvas.getContext("2d");
