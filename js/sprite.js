@@ -18,7 +18,8 @@ class Sprite
 		// For testing purposes, all sprites are bouncy by default. Feel free to change when wrapping is implemented
 		this.bouncy = true;
 		this.wrapping = false;
-		// a third setting could be stopping against a wall?
+		// a third setting could be "bound to world (canvas)"
+		// might also need to store world size values somewhere...
 	}
 
 	setSize(w, h)
