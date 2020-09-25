@@ -13,6 +13,12 @@ class Sprite
 		// -Default Velocity Values-
 		this.dx = 0;
 		this.dy = 0;
+
+		// -Default Wall Interaction Values-
+		// For testing purposes, all sprites are bouncy by default. Feel free to change when wrapping is implemented
+		this.bouncy = true;
+		this.wrapping = false;
+		// a third setting could be stopping against a wall?
 	}
 
 	setSize(w, h)
@@ -27,18 +33,38 @@ class Sprite
 		this.dy = dy;
 	}
 
-	update()
+	bounce()
 	{
-		// changes position according to velocity (dx,dy)
-		this.x += this.dx;
-		this.y += this.dy;
-
 		// The following code accounts for Sprites bouncing against the canvas walls.
 		if (this.x + this.w > 512 || this.x < 0)
 			this.dx = -1 * this.dx;
 
 		if (this.y + this.h > 512 || this.y < 0)
 			this.dy = -1 * this.dy;
+	}
+
+	//to be implemented
+	wrap()
+	{
+
+	}
+
+	update()
+	{
+		// changes position according to velocity (dx,dy)
+		this.x += this.dx;
+		this.y += this.dy;
+
+		// causes the sprite to bounce against the wall of the canvas if it is bouncy
+		if (this.bouncy)
+			this.bounce();
+
+		// causes the sprite to wrap to the other side of the screen if it is 
+		// wrap is currently not implemented
+		if (this.wrapping)
+			this.wrap();
+		
+		
 	}
 
 	render(context)
