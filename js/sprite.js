@@ -1,9 +1,12 @@
 class Sprite
 {
-	constructor(x, y, imageID)
+	constructor(x, y, imageID, bounces, wraps)
 	{
+		// The starting point of the Sprite on the canvas in x and y coordinates.
 		this.x = x;
 		this.y = y;
+
+		// This Sprite's imageID (the ID each image is given when imported at the top of the main HTML file).
 		this.image = document.getElementById(imageID);
 
 		// -Default Size Values- (width, height)
@@ -15,9 +18,11 @@ class Sprite
 		this.dy = 0;
 
 		// -Default Wall Interaction Values-
-		// For testing purposes, all sprites are bouncy by default. Feel free to change when wrapping is implemented
-		this.bouncy = true;
-		this.wrapping = false;
+		// Similarly to x, y, and imageID, the main HTML file provides a value (in this case, boolean) for each
+		// of the following variables within the Sprite Object creation.
+		this.doesBounce = bounces;
+		this.doesWrap = wraps;
+
 		// a third setting could be "bound to world (canvas)"
 		// might also need to store world size values somewhere...
 	}
@@ -44,25 +49,36 @@ class Sprite
 			this.dy = -1 * this.dy;
 	}
 
-	//to be implemented
 	wrap()
 	{
+		// The following code has the Sprite wrap to the opposite side of the canvas
+		// if it moves past any of the canvas walls.
+		if (this.x + this.w < 0)
+			this.x = (512 + this.w) + this.x;
+		
+		if (this.x > 512)
+			this.x = this.x - (512 + this.w);
 
+		if (this.y + this.h < 0)
+			this.y = (512 + this.h) + this.y;
+
+		if (this.y > 512)
+			this.y = this.y - (512 + this.h);
 	}
 
 	update()
 	{
-		// changes position according to velocity (dx,dy)
+		// Changes Sprite's position according to velocity (dx,dy).
 		this.x += this.dx;
 		this.y += this.dy;
 
-		// causes the sprite to bounce against the wall of the canvas if it is bouncy
-		if (this.bouncy)
+		// If doesBounce is true for this Sprite...Sprite will bounce against the designated walls of the canvas.
+		if (this.doesBounce)
 			this.bounce();
 
-		// causes the sprite to wrap to the other side of the screen if it is 
-		// wrap is currently not implemented
-		if (this.wrapping)
+		// If doesWrap is true for this Sprite...Sprite will wrap around to the opposite side of the canvas if it
+		// travels past one of the walls.
+		if (this.doesWrap)
 			this.wrap();
 		
 		
