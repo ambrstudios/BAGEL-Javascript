@@ -1,6 +1,6 @@
 class Sprite
 {
-	constructor(x, y, imageID, bounces, wraps)
+	constructor(x, y, imageID)
 	{
 		// The starting point of the Sprite on the canvas in x and y coordinates.
 		this.x = x;
@@ -20,8 +20,12 @@ class Sprite
 		// -Default Wall Interaction Values-
 		// Similarly to x, y, and imageID, the main HTML file provides a value (in this case, boolean) for each
 		// of the following variables within the Sprite Object creation.
-		this.doesBounce = bounces;
-		this.doesWrap = wraps;
+		this.doesBounce = false;
+		this.doesWrap = false;
+
+		// world size
+		this.worldWidth = 512;
+		this.worldHeight = 512;
 
 		// a third setting could be "bound to world (canvas)"
 		// might also need to store world size values somewhere...
@@ -39,20 +43,41 @@ class Sprite
 		this.dy = dy;
 	}
 
+	setBounce(worldWidth, worldHeight)
+	{
+		this.worldWidth	= worldWidth;
+		this.worldHeight = worldHeight;
+		this.doesBounce = true;
+	}
+
+	// TODO: finish these
+	setWrap()
+	{
+
+	}
+
+	setBound()
+	{
+
+	}
+
 	bounce()
 	{
 		// The following code accounts for Sprites bouncing against the canvas walls.
-		if (this.x + this.w > 512 || this.x < 0)
+		if (this.x + this.w > this.worldWidth || this.x < 0)
 			this.dx = -1 * this.dx;
 
-		if (this.y + this.h > 512 || this.y < 0)
+		if (this.y + this.h > this.worldHeight || this.y < 0)
 			this.dy = -1 * this.dy;
 	}
 
+	// TODO: update this also with world size variables.
 	wrap()
 	{
 		// The following code has the Sprite wrap to the opposite side of the canvas
 		// if it moves past any of the canvas walls.
+
+		// TODO: add comments explaining why not just x = 512?
 		if (this.x + this.w < 0)
 			this.x = (512 + this.w) + this.x;
 		
@@ -66,6 +91,22 @@ class Sprite
 			this.y = this.y - (512 + this.h);
 	}
 
+	// TODO: finish this
+	bound()
+	{
+
+	}
+
+	// TODO: comment this!
+	overlaps( otherSprite )
+	{
+		let noOverlap = this.x > otherSprite.x + otherSprite.w ||
+						this.x + this.w < otherSprite.x ||
+						this.y > otherSprite.y + otherSprite.h ||
+						this.y + this.h < otherSprite.y;
+
+		return !noOverlap;			
+	}
 	update()
 	{
 		// Changes Sprite's position according to velocity (dx,dy).
@@ -81,6 +122,9 @@ class Sprite
 		if (this.doesWrap)
 			this.wrap();
 		
+		// TODO: implement this
+		if (this.doesBound)
+			this.bound();
 		
 	}
 
